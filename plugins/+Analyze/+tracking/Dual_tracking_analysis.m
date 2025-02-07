@@ -238,7 +238,7 @@ if contains(p.showtraces.selection,'progressive co-tracks')
     % numrows=ceil(length(goodpairs)/5);
     f=0;
     for k=1:length(goodpairs)
-        if 2*k-f>25
+        if 2*k-f>30
             f=f+30;
             figure
         end
