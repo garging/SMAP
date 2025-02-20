@@ -181,20 +181,23 @@ classdef GuiFilterTable< interfaces.LayerInterface
                     hfilter=obj.getPar('filterpanel');
                     hfilter.Visible='on';
                     drawnow
-                    js=findjobj(obj.guihandles.table);
+                    % js=findjobj(obj.guihandles.table);
                     if strcmp(hovvis,'on')
                         hovim.Visible='on';
                         hfilter.Visible='off';
                     end
-                    obj.javaobj=js;
+                    % obj.javaobj=js;
                 else 
-                    js=obj.javaobj;
+                    % js=obj.javaobj;
                 end
-                jtable=js.getViewport.getView;
-                jtable.setSortable(true);		% or: set(jtable,'Sortable','on');
-                jtable.setAutoResort(true);
-                jtable.setMultiColumnSortable(true);
-                jtable.setPreserveSelectionsAfterSorting(true);
+                h=obj.guihandles.table;
+                h.ColumnSortable=true;
+                
+                % jtable=js.getViewport.getView;
+                % jtable.setSortable(true);		% or: set(jtable,'Sortable','on');
+                % jtable.setAutoResort(true);
+                % jtable.setMultiColumnSortable(true);
+                % jtable.setPreserveSelectionsAfterSorting(true);
         
 
                 

@@ -88,14 +88,18 @@ classdef DialogProcessor<interfaces.GuiModuleInterface & interfaces.LocDataInter
             obj.resultshandle.Renderer='painters';
             
             %make convert to grid
-            hToolbar=findall(obj.resultshandle, 'type', 'uitoolbar');
+            hToolbar=findall(obj.resultshandle, 'Type', 'uitoolbar');
+            if isempty(hToolbar)
+                hToolbar=uitoolbar(obj.resultshandle);
+            end
+ 
             pushtool=uipushtool(hToolbar);
             img=ones(16,16,3);
             img(6,:,:)=0;img(11,:,:)=0;img(:,6,:)=0;img(:,11,:)=0;
             pushtool.CData=img;
             pushtool.ClickedCallback=@makegridoutput;
             pushtool.Tooltip='Create new figure with all tabs arranged next to each other';
-            
+
             htab=uitabgroup(obj.resultshandle);
             obj.guihandles.resultstabgroup=htab;
             obj.resultstabgroup=obj.guihandles.resultstabgroup;
