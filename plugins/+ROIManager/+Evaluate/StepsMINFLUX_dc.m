@@ -113,7 +113,7 @@ classdef StepsMINFLUX_dc<interfaces.SEEvaluationProcessor
            time1=obj.locsuse.time(index1);
 
            %offset
-           if isfield(obj.site.evaluation.(obj.modulename),'offset') && ~isempty(obj.site.evaluation.(obj.modulename).offset)
+           if existnotempty(obj.site,'evaluation',obj.modulename,'offset') %isfield(obj.site.evaluation.(obj.modulename),'offset') && ~isempty(obj.site.evaluation.(obj.modulename).offset)
                offset=obj.site.evaluation.(obj.modulename).offset;
                obj.setGuiParameters(struct('offx',offset(1),'offy',offset(2)));
            else

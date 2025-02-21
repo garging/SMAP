@@ -38,7 +38,7 @@ classdef StepsMINFLUX<interfaces.SEEvaluationProcessor
                 end                
            end
 
-           if isfield(obj.site.evaluation.(obj.modulename),'overshoot') && ~isempty(obj.site.evaluation.(obj.modulename).overshoot)
+           if existnotempty(obj.site.evaluation,(obj.modulename),'overshoot') %&& ~isempty(obj.site.evaluation.(obj.modulename).overshoot)
                p.overshoot=obj.site.evaluation.(obj.modulename).overshoot;
                obj.setGuiParameters(struct('overshoot',p.overshoot));
            end
