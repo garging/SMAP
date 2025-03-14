@@ -79,7 +79,6 @@ for k=1:length(usetracks)
         continue
     end
 
-
     xh=locs.xnm(tind);yh=locs.ynm(tind);fh=locs.frame(tind);
     trackstat.lennmstartend(iduset)=sqrt((xh(end)-xh(1)).^2+(yh(end)-yh(1)).^2);
         
@@ -243,10 +242,26 @@ if contains(p.showtraces.selection,'progressive')
 end
 
 % Calculate statistics
-disp(sprintf('total\tprogressive'));
-output=(sprintf([num2str(length(trackstat.progressive)), '\t' num2str(sum(trackstat.progressive))]));
+% disp(sprintf('total\tprogressive'));
+% output=(sprintf([num2str(length(trackstat.progressive)), '\t' num2str(sum(trackstat.progressive))]));
+
+% extracts filename from file path:
+    filePath = string(obj.getPar('lastSMLFile'));
+    % Find all occurrences of the substring
+    slash_indices = strfind(filePath, '/');
+    % If the substring is found
+    if ~isempty(slash_indices)
+        % Get the last occurrence index
+        lastSlashIndex = slash_indices(end);
+        % Extract the substring after the last occurrence
+        fileName = extractAfter(filePath, lastSlashIndex);
+    else
+        fileName = filePath;
+    end
+
+output=(table(fileName,length(trackstat.progressive), sum(trackstat.progressive), 'VariableNames', {'Filename','Total', 'Progressive'}));
 disp(output)
-clipboard('copy',output)
+% clipboard('copy',output)
 out=output;
 
 end
