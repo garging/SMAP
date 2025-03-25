@@ -56,6 +56,7 @@ obj.setPar('locFields',fieldnames(obj.locData.loc))
 end
 
 function out=tracksingle(obj,p,locs,indin,indfilter)
+out=[];
 % locs.xnm=-min(locs.xnm);
 % locs.ynm=-min(locs.ynm);
 if nargin>4 %filter transmitted
@@ -73,6 +74,10 @@ xyzt=double(horzcat(locs.xnm(indfilter),locs.ynm(indfilter),locs.frame(indfilter
 end
 p.quiet=false;
 tracks=mytrack(xyzt,p.maxdisp,p);
+if isempty(tracks)
+    obj.locData.setloc('track_id',zeros(size(obj.locData.loc.xnm)));
+    return
+end
 llocs.x=locs.xnm(indfilter);llocs.y=locs.ynm(indfilter);llocs.frame=locs.frame(indfilter);
 
 ftracks=tracks(:,end-1);
@@ -99,7 +104,7 @@ idall(findin(iAa))=id+minID;
 obj.locData.setloc('track_id',idall);
 
 
-out=[];
+
 % p.mode=1;
 % analyze_SPT(tracks,p);
 end
